@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 public class InitDriver {
+
     protected WebDriver driver;
     protected Logger log = LogManager.getRootLogger();
 

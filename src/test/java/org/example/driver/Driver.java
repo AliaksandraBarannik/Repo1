@@ -8,6 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 public class Driver {
+
     protected WebDriver driver;
 
     @BeforeClass(alwaysRun = true)

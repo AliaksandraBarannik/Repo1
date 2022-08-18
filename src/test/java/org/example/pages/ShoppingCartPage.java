@@ -10,6 +10,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class ShoppingCartPage extends InitDriver {
+
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
     @FindBy(xpath = "//div[@data-name='Active Cart']//div[@class='a-row']//*[contains(text(),'Shopping Cart')]")
