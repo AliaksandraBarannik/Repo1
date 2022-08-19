@@ -9,6 +9,7 @@ import org.example.service.ShoppingCartPageService;
 import org.example.service.StartedPageService;
 import org.example.object.User;
 import org.example.service.UserService;
+import org.example.util.Config;
 import org.hamcrest.Matchers;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -59,7 +60,7 @@ public class AddItemToCartTest extends BaseTest {
 
     @Test(description = "1.3")
     public void isIconColorGreen() {
-        assertThat("Color is not green", cartPageService.getColor(), Matchers.equalTo("rgba(6, 125, 98, 1)"));
+        assertThat("Color is not green", cartPageService.getColor(), Matchers.equalTo(Config.getProperties("greenColor")));
     }
 
     @Test(description = "1.3")
