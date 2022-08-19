@@ -1,4 +1,4 @@
-package org.example.loggers;
+package org.example.service;
 
 import org.example.object.User;
 import org.example.pages.LoginPage;

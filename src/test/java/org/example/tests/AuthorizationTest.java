@@ -1,8 +1,8 @@
 package org.example.tests;
 
 import org.example.driver.BaseTest;
-import org.example.loggers.LoginPageService;
-import org.example.loggers.StartedPageService;
+import org.example.service.LoginPageService;
+import org.example.service.StartedPageService;
 import org.example.object.User;
 import org.example.service.UserService;
 import org.hamcrest.Matchers;

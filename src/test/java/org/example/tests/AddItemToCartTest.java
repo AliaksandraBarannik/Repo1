@@ -1,12 +1,12 @@
 package org.example.tests;
 
 import org.example.driver.BaseTest;
-import org.example.loggers.CartPageService;
-import org.example.loggers.LoginPageService;
-import org.example.loggers.ProductPageService;
-import org.example.loggers.ResultPageService;
-import org.example.loggers.ShoppingCartPageService;
-import org.example.loggers.StartedPageService;
+import org.example.service.CartPageService;
+import org.example.service.LoginPageService;
+import org.example.service.ProductPageService;
+import org.example.service.ResultPageService;
+import org.example.service.ShoppingCartPageService;
+import org.example.service.StartedPageService;
 import org.example.object.User;
 import org.example.service.UserService;
 import org.hamcrest.Matchers;
