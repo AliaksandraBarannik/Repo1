@@ -1,19 +1,13 @@
 package org.example.loggers;
 
-import org.example.pages.InitDriver;
 import org.example.pages.CartPage;
-import org.openqa.selenium.WebDriver;
 
 import java.util.logging.Logger;
 
-public class CartLogger extends InitDriver {
+public class CartPageService extends BasePageService {
 
-    public static final Logger log = Logger.getLogger(CartLogger.class.getName());
-    CartPage cartPage = new CartPage(driver);
-
-    public CartLogger(WebDriver driver) {
-        super(driver);
-    }
+    public static final Logger log = Logger.getLogger(CartPageService.class.getName());
+    CartPage cartPage = new CartPage();
 
     public boolean isProductImageDisplayed() {
         boolean result = cartPage.isProductImageDisplayed();
@@ -31,13 +25,15 @@ public class CartLogger extends InitDriver {
         return cartPage.getColor();
     }
 
-    public void clickOnDeleteButton() {
+    public CartPageService clickOnDeleteButton() {
         log.info("Click on 'Delete' button");
         cartPage.clickOnDeleteButton();
+        return new CartPageService();
     }
 
-    public void clickOnGoToCartButton() {
+    public ShoppingCartPageService clickOnGoToCartButton() {
         log.info("Click on 'Go to cart' button");
         cartPage.clickOnGoToCartButton();
+        return new ShoppingCartPageService();
     }
 }

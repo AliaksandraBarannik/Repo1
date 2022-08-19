@@ -1,62 +1,54 @@
 package org.example.pages;
 
-import org.openqa.selenium.WebDriver;
+import org.example.util.Config;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class StartedPage extends InitDriver {
+public class StartedPage extends BasePage {
 
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
-    private final String URL = "https://www.amazon.com/ref=nav_logo";
+    public WebElement getAccountName() {
+        return driver.findElement(By.xpath("//a[@data-nav-ref='nav_youraccount_btn']//span[@id='nav-link-accountList-nav-line-1']"));
+    }
 
-    @FindBy(xpath = "//header//div//a[@data-nav-ref='nav_ya_signin']")
-    private WebElement clickOnSignInMenu;
+    public WebElement getCartButton() {
+        return driver.findElement(By.xpath("//div//a[@id='nav-cart']"));
+    }
 
-    @FindBy(xpath = "//div[@id='nav-tools']//a[@data-nav-ref='nav_youraccount_btn']//span")
-    private WebElement accountName;
+    public WebElement getSearchField() {
+        return driver.findElement(By.xpath("//header//input[@name='field-keywords']"));
+    }
 
-    @FindBy(xpath = "//header//input[@name='field-keywords']")
-    private WebElement searchField;
-
-    @FindBy(xpath = "//header//input[@type='submit']")
-    private WebElement submitButton;
-
-    @FindBy(xpath = "//div//a[@id='nav-cart']")
-    private WebElement cartButton;
-
-    public StartedPage(WebDriver driver) {
-        super(driver);
+    public WebElement getSignInMenu() {
+        return driver.findElement(By.xpath("//header//div//a[@data-nav-ref='nav_ya_signin']"));
     }
 
     public StartedPage navigate() {
-        driver.navigate().to(URL);
+        driver.navigate().to(Config.getProperties("logoUrl"));
         return this;
     }
 
     public void clickOnSignInMenu() {
-        wait.until(ExpectedConditions.elementToBeClickable(clickOnSignInMenu));
-        clickOnSignInMenu.click();
+        wait.until(ExpectedConditions.elementToBeClickable(getSignInMenu()));
+        getSignInMenu().click();
     }
 
     public String getAccountGreetingText() {
-        return accountName.getText();
+        return getAccountName().getText();
     }
 
     public StartedPage fillSearchField(String text) {
-        searchField.sendKeys(text);
+        getSearchField().clear();
+        getSearchField().sendKeys(text);
         return this;
     }
 
-    public void clickOnSubmitButton() {
-        submitButton.click();
-    }
-
     public void clickOnCartButton() {
-        cartButton.click();
+        getCartButton().click();
     }
 }

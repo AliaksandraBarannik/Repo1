@@ -1,47 +1,47 @@
 package org.example.pages;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
-public class CartPage extends InitDriver {
+public class CartPage extends BasePage {
 
-    @FindBy(xpath = "//div[@id='sw-atc-details-single-container']//img")
-    private WebElement productImage;
+    public WebElement getConfirmedIconAddedToCart() {
+        return driver.findElement(By.xpath("//div//i[@class='a-icon a-icon-alert']"));
+    }
 
-    @FindBy(xpath = "//div[@id='sw-atc-details-single-container']//span")
-    private WebElement msg;
+    public WebElement getDeleteProductButton() {
+        return driver.findElement(By.xpath("//div[@data-encoded-offering]//input[@value='Delete']"));
+    }
 
-    @FindBy(xpath = "//div[@id='sw-atc-details-single-container']//div//i[@class='a-icon a-icon-alert']")
-    private WebElement icon;
+    public WebElement getGoToCartButton() {
+        return driver.findElement(By.xpath("//div//span[@id='sw-gtc']//a[contains(@href,'cart')]"));
+    }
 
-    @FindBy(xpath = "//div[@data-encoded-offering]//input[@value='Delete']")
-    private WebElement deleteProductFromCart;
+    public WebElement getMsgAboutAddedItemToCart() {
+        return driver.findElement(By.xpath("//div[@id='sw-atc-details-single-container']//span"));
+    }
 
-    @FindBy(xpath = "//div//span[@id='sw-gtc']//a[contains(@href,'cart')]")
-    private WebElement goToCartButton;
-
-    public CartPage(WebDriver driver) {
-        super(driver);
+    public WebElement getProductImage() {
+        return driver.findElement(By.xpath("//div[@id='sw-atc-details-single-container']//img"));
     }
 
     public boolean isProductImageDisplayed() {
-        return productImage.isDisplayed();
+        return getProductImage().isDisplayed();
     }
 
     public String getMsgText() {
-        return msg.getText();
+        return getMsgAboutAddedItemToCart().getText();
     }
 
     public String getColor() {
-        return icon.getCssValue("color");
+        return getConfirmedIconAddedToCart().getCssValue("color");
     }
 
     public void clickOnDeleteButton() {
-        deleteProductFromCart.click();
+        getDeleteProductButton().click();
     }
 
     public void clickOnGoToCartButton() {
-        goToCartButton.click();
+        getGoToCartButton().click();
     }
 }

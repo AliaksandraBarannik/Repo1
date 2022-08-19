@@ -1,13 +1,13 @@
 package org.example.tests;
 
-import org.example.driver.Driver;
-import org.example.loggers.CartLogger;
-import org.example.loggers.LoginLogger;
-import org.example.loggers.ProductLogger;
-import org.example.loggers.ResultLogger;
-import org.example.loggers.ShoppingCartLogger;
-import org.example.loggers.StartedLogger;
-import org.example.model.User;
+import org.example.driver.BaseTest;
+import org.example.loggers.CartPageService;
+import org.example.loggers.LoginPageService;
+import org.example.loggers.ProductPageService;
+import org.example.loggers.ResultPageService;
+import org.example.loggers.ShoppingCartPageService;
+import org.example.loggers.StartedPageService;
+import org.example.object.User;
 import org.example.service.UserService;
 import org.hamcrest.Matchers;
 import org.testng.annotations.AfterMethod;
@@ -17,73 +17,72 @@ import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class AddItemToCartTest extends Driver {
+public class AddItemToCartTest extends BaseTest {
 
-    private ProductLogger productLogger;
-    private StartedLogger startedLogger;
-    private ResultLogger resultLogger;
-    private CartLogger cartLogger;
-    private ShoppingCartLogger shoppingCartLogger;
+    private ProductPageService productPageService;
+    private StartedPageService startedPageService;
+    private ResultPageService resultPageService;
+    private CartPageService cartPageService;
+    private ShoppingCartPageService shoppingCartPageService;
+    private LoginPageService loginPageService;
+
 
     @BeforeClass(alwaysRun = true)
     public void registration() {
-        startedLogger = new StartedLogger(driver);
-        LoginLogger loginLogger = new LoginLogger(driver);
-        resultLogger = new ResultLogger(driver);
-        productLogger = new ProductLogger(driver);
-        cartLogger = new CartLogger(driver);
-        shoppingCartLogger = new ShoppingCartLogger(driver);
-
         User user = UserService.credentials();
-        startedLogger.clickOnSignInMenu();
-        loginLogger.logIn(user);
+
+        startedPageService = new StartedPageService();
+        resultPageService = new ResultPageService();
+        shoppingCartPageService = new ShoppingCartPageService();
+        loginPageService = startedPageService.clickOnSignInMenu();
+        startedPageService = loginPageService.logIn(user);
     }
 
     @BeforeMethod(alwaysRun = true)
     public void searchElement() {
-        startedLogger.navigate();
-        startedLogger.fillSearchField("iPhone")
+        startedPageService.navigate();
+        startedPageService.fillSearchField("iPhone")
                 .clickOnSubmitButton();
-        resultLogger.clickOnFirstElementInListOfItems();
-        productLogger.clickAddCartButton();
+        productPageService = resultPageService.clickOnFirstElementInListOfItems();
+        cartPageService = productPageService.clickAddCartButton();
     }
 
     @Test(description = "1.3")
     public void isProductImageDisplayed() {
-        assertThat("The image of added item is displayed", cartLogger.isProductImageDisplayed());
+        assertThat("The image of added item is displayed", cartPageService.isProductImageDisplayed());
     }
 
     @Test(description = "1.3")
     public void isTextDisplayed() {
-        assertThat("Check added msg", cartLogger.getMsgText(), Matchers.equalTo("Added to Cart"));
+        assertThat("Check added msg", cartPageService.getMsgText(), Matchers.equalTo("Added to Cart"));
     }
 
     @Test(description = "1.3")
     public void isIconColorGreen() {
-        assertThat("Color is not green", cartLogger.getColor(), Matchers.equalTo("rgba(6, 125, 98, 1)"));
+        assertThat("Color is not green", cartPageService.getColor(), Matchers.equalTo("rgba(6, 125, 98, 1)"));
     }
 
     @Test(description = "1.3")
     public void isQuantityChangeInTheCart() {
-        int quantity = productLogger.getQuantityOfItemsInTheCart();
+        int quantity = productPageService.getQuantityOfItemsInTheCart();
         assertThat("Cart is empty or has more than 1 item", quantity, Matchers.equalTo(1));
     }
 
     @Test(description = "1.4")
     public void isShoppingCartOpened() {
-        cartLogger.clickOnGoToCartButton();
-        assertThat("Shopping car isn`t displayed", shoppingCartLogger.isShoppingCartDisplayed());
+        cartPageService.clickOnGoToCartButton();
+        assertThat("Shopping cart isn`t displayed", shoppingCartPageService.isShoppingCartDisplayed("Shopping Cart"));
     }
 
     @Test(description = "1.4")
     public void isAddedItemsDisplayedInTheShoppingCart() {
-        cartLogger.clickOnGoToCartButton();
-        assertThat("Added items aren`t displayed in the shopping cart", !shoppingCartLogger.isListOfElementsInTheShoppingCartEmpty());
+        cartPageService.clickOnGoToCartButton();
+        assertThat("Added items aren`t displayed in the shopping cart", !shoppingCartPageService.isListOfElementsInTheShoppingCartEmpty());
     }
 
     @AfterMethod(alwaysRun = true)
     public void deleteElementFromCart() {
-        startedLogger.clickOnCartButton();
-        cartLogger.clickOnDeleteButton();
+        startedPageService.clickOnCartButton();
+        cartPageService.clickOnDeleteButton();
     }
 }
