@@ -1,6 +1,6 @@
 package org.example.pages;
 
-import org.example.util.Config;
+import org.example.util.GetProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -29,7 +29,7 @@ public class StartedPage extends BasePage {
     }
 
     public StartedPage navigate() {
-        driver.navigate().to(Config.getProperties("logoUrl"));
+        driver.navigate().to(GetProperties.getProperties("config", "logoUrl"));
         return this;
     }
 
