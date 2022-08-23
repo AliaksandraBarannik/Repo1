@@ -6,11 +6,11 @@ import org.openqa.selenium.WebElement;
 public class ProductPage extends BasePage {
 
     public WebElement getAddToCartButton() {
-        return driver.findElement(By.xpath("//div//input[@name='submit.add-to-cart']"));
+        return driver.findElement(By.xpath("//input[@name='submit.add-to-cart']"));
     }
 
     public WebElement getItemsInTheCart() {
-        return driver.findElement(By.xpath("//header//a[contains(@href,'nav_cart')]//span"));
+        return driver.findElement(By.xpath("//span[@id='nav-cart-count']"));
     }
 
     public int getQuantityOfItemsInTheCart() {

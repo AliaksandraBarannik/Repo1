@@ -34,8 +34,8 @@ public class CheckProductQuantityInTheCartTest extends BaseTest {
     @BeforeMethod
     public void searchElement() {
         startedPageService.navigate();
-        startedPageService.fillSearchField("iPhone")
-                .clickOnSubmitButton();
+        resultPageService = startedPageService.fillSearchField("iPhone");
+        resultPageService.clickOnSubmitButton();
         productPageService = resultPageService.clickOnFirstElementInListOfItems();
     }
 
