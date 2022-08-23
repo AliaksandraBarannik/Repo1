@@ -14,9 +14,4 @@ public class BasePageService {
         log.info("Click on submit button");
         basePage.clickOnSubmitButton();
     }
-
-    public String getText(String locator) {
-        log.info("Get text from the field");
-        return basePage.getText(locator);
-    }
 }

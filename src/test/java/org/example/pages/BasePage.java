@@ -20,8 +20,4 @@ public class BasePage {
     public void clickOnSubmitButton() {
         getSubmitButton().click();
     }
-
-    public String getText(String locator) {
-        return driver.findElement(By.xpath(locator)).getText();
-    }
 }
