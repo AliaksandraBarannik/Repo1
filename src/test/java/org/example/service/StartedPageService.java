@@ -20,10 +20,10 @@ public class StartedPageService extends BasePageService {
         return startedPage.getAccountGreetingText();
     }
 
-    public StartedPageService fillSearchField(String text) {
+    public ResultPageService fillSearchField(String text) {
         log.info("Fill search filed with text " + text);
         startedPage.fillSearchField(text);
-        return this;
+        return new ResultPageService();
     }
 
     public StartedPageService navigate() {

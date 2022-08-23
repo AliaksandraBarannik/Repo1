@@ -1,23 +1,21 @@
 package org.example.pages;
 
+import org.example.util.Waiters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 public class ShoppingCartPage extends BasePage {
 
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+    Waiters waiters = new Waiters();
 
     public WebElement getShoppingCartText() {
-        return driver.findElement(By.xpath("//div[@data-name='Active Cart']//div[@class='a-row']"));
+        return driver.findElement(By.xpath("//div[contains(@class,'sc-compact-bottom')]/div[1]"));
     }
 
     public List<WebElement> getListOfElementsInTheShoppingCart() {
-        return driver.findElements(By.xpath("//div//img[@class='sc-product-image']"));
+        return driver.findElements(By.xpath("//img[@class='sc-product-image']"));
     }
 
     public String getShoppingCartNameText() {
@@ -25,7 +23,7 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public boolean isListOfElementsInTheShoppingCartEmpty() {
-        wait.until(ExpectedConditions.visibilityOfAllElements(getListOfElementsInTheShoppingCart()));
+        waiters.elementsToBeVisible(getListOfElementsInTheShoppingCart());
         return getListOfElementsInTheShoppingCart().isEmpty();
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public class ResultPage extends BasePage {
 
     public List<WebElement> getListOfItems() {
-        return driver.findElements(By.xpath("//div[@data-component-type='s-search-result']//a[@class='a-link-normal s-no-outline']"));
+        return driver.findElements(By.xpath("//a[@class='a-link-normal s-no-outline']"));
     }
 
     public List<String> getListOfItemsNamesText() {

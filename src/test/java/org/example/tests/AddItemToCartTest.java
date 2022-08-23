@@ -27,13 +27,11 @@ public class AddItemToCartTest extends BaseTest {
     private ShoppingCartPageService shoppingCartPageService;
     private LoginPageService loginPageService;
 
-
     @BeforeClass(alwaysRun = true)
     public void registration() {
         User user = UserService.credentials();
 
         startedPageService = new StartedPageService();
-        resultPageService = new ResultPageService();
         shoppingCartPageService = new ShoppingCartPageService();
         loginPageService = startedPageService.clickOnSignInMenu();
         startedPageService = loginPageService.logIn(user);
@@ -42,8 +40,8 @@ public class AddItemToCartTest extends BaseTest {
     @BeforeMethod(alwaysRun = true)
     public void searchElement() {
         startedPageService.navigate();
-        startedPageService.fillSearchField("iPhone")
-                .clickOnSubmitButton();
+        resultPageService = startedPageService.fillSearchField("iPhone");
+        resultPageService.clickOnSubmitButton();
         productPageService = resultPageService.clickOnFirstElementInListOfItems();
         cartPageService = productPageService.clickAddCartButton();
     }

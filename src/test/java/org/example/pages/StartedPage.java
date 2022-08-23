@@ -1,31 +1,28 @@
 package org.example.pages;
 
 import org.example.util.Config;
+import org.example.util.Waiters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class StartedPage extends BasePage {
 
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    Waiters waiters = new Waiters();
 
     public WebElement getAccountName() {
-        return driver.findElement(By.xpath("//a[@data-nav-ref='nav_youraccount_btn']//span[@id='nav-link-accountList-nav-line-1']"));
+        return driver.findElement(By.xpath("//span[@id='nav-link-accountList-nav-line-1']"));
     }
 
     public WebElement getCartButton() {
-        return driver.findElement(By.xpath("//div//a[@id='nav-cart']"));
+        return driver.findElement(By.xpath("//a[@id='nav-cart']"));
     }
 
     public WebElement getSearchField() {
-        return driver.findElement(By.xpath("//header//input[@name='field-keywords']"));
+        return driver.findElement(By.xpath("//input[@name='field-keywords']"));
     }
 
     public WebElement getSignInMenu() {
-        return driver.findElement(By.xpath("//header//div//a[@data-nav-ref='nav_ya_signin']"));
+        return driver.findElement(By.xpath("//a[@data-nav-ref='nav_ya_signin']"));
     }
 
     public StartedPage navigate() {
@@ -34,8 +31,7 @@ public class StartedPage extends BasePage {
     }
 
     public void clickOnSignInMenu() {
-        wait.until(ExpectedConditions.elementToBeClickable(getSignInMenu()));
-        getSignInMenu().click();
+        waiters.elementToBeClickable(getSignInMenu()).click();
     }
 
     public String getAccountGreetingText() {
