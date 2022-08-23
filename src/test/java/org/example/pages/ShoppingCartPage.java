@@ -20,6 +20,14 @@ public class ShoppingCartPage extends BasePage {
         return driver.findElements(By.xpath("//div//img[@class='sc-product-image']"));
     }
 
+    public WebElement getItemsName() {
+        return driver.findElement(By.xpath("//div//span[@class='a-truncate-cut']"));
+    }
+
+    public WebElement getItemsPrice() {
+        return driver.findElement(By.xpath("//div//span[@id='sc-subtotal-amount-activecart']//span"));
+    }
+
     public String getShoppingCartNameText() {
         return getShoppingCartText().getText();
     }
@@ -27,5 +35,18 @@ public class ShoppingCartPage extends BasePage {
     public boolean isListOfElementsInTheShoppingCartEmpty() {
         wait.until(ExpectedConditions.visibilityOfAllElements(getListOfElementsInTheShoppingCart()));
         return getListOfElementsInTheShoppingCart().isEmpty();
+    }
+
+    public String getItemsNameText() {
+        return getItemsName().getText();
+    }
+
+    public String getItemFields(String fieldName) {
+        String itemFields = "//li//span[@class='a-size-small a-text-bold' and contains(text(),'%s')]//following-sibling::span";
+        return driver.findElement(By.xpath(String.format(itemFields, fieldName))).getText();
+    }
+
+    public String getItemsPriceText() {
+        return getItemsPrice().getText();
     }
 }

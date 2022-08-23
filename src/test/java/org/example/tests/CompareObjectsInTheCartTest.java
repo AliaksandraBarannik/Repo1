@@ -51,8 +51,8 @@ public class CompareObjectsInTheCartTest extends BaseTest {
 
     @Test(description = "Task3")
     public void checkPhoneDescription() {
-        assertThat("This objects are not equal", productService.getObjectFromProperties(),
-                Matchers.equalTo(productService.getActualObject()));
+        assertThat("This objects are not equal", productService.getActualObject(),
+                Matchers.equalTo(productService.getObjectFromProperties()));
     }
 
     @AfterMethod(alwaysRun = true)

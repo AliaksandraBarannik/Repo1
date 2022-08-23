@@ -20,4 +20,16 @@ public class ShoppingCartPageService extends BasePageService {
         log.info("List of elements in the shopping cart is empty " + result);
         return result;
     }
+
+    public String getItemNameText() {
+        return shoppingCartPage.getItemsNameText();
+    }
+
+    public String getItemFieldsText(String fieldName) {
+        return shoppingCartPage.getItemFields(fieldName);
+    }
+
+    public String getItemPriceText() {
+        return shoppingCartPage.getItemsPriceText();
+    }
 }
