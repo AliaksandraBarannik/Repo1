@@ -41,18 +41,29 @@ public class CompareObjectsInTheCartTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void searchElementAndGoToTheCart() {
-        startedPageService.navigate();
-        startedPageService.fillSearchField(GetProperties.getProperties("product", "name"))
-                .clickOnSubmitButton();
-        productPageService = resultPageService.clickOnFirstElementInListOfItems();
-        cartPageService = productPageService.clickAddCartButton();
-        shoppingCartPageService = cartPageService.clickOnGoToCartButton();
+        startedPageService.goToMainPage();
     }
 
     @Test(description = "Task3")
     public void checkPhoneDescription() {
-        assertThat("This objects are not equal", productService.getActualObject(),
-                Matchers.equalTo(productService.getObjectFromProperties()));
+        resultPageService = startedPageService.fillSearchField(GetProperties.getProperties("product", "phone_name"));
+        resultPageService.clickOnSubmitButton();
+        productPageService = resultPageService.clickOnElementInTheList(GetProperties.getProperties("product", "phone_name"));
+        cartPageService = productPageService.clickAddCartButton();
+        shoppingCartPageService = cartPageService.clickOnGoToCartButton();
+        assertThat("These objects are not equal", productService.getActualPhoneObject(),
+                Matchers.equalTo(productService.getPhoneObjectFromProperties()));
+    }
+
+    @Test(description = "Task3")
+    public void checkKindleDescription() {
+        resultPageService = startedPageService.fillSearchField(GetProperties.getProperties("product", "kindle_searchname"));
+        resultPageService.clickOnSubmitButton();
+        productPageService = resultPageService.clickOnElementInTheList(GetProperties.getProperties("product", "kindle_name"));
+        cartPageService = productPageService.clickAddCartButton();
+        shoppingCartPageService = cartPageService.clickOnGoToCartButton();
+        assertThat("This objects are not equal", String.valueOf(productService.getActualKindleObject()),
+                Matchers.equalTo(String.valueOf(productService.getKindleObjectFromProperties())));
     }
 
     @AfterMethod(alwaysRun = true)

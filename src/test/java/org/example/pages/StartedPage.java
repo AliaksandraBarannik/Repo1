@@ -1,6 +1,5 @@
 package org.example.pages;
 
-import org.example.util.Config;
 import org.example.util.Waiters;
 import org.example.util.GetProperties;
 import org.openqa.selenium.By;
@@ -26,13 +25,13 @@ public class StartedPage extends BasePage {
         return driver.findElement(By.xpath("//a[@data-nav-ref='nav_ya_signin']"));
     }
 
-    public StartedPage navigate() {
+    public StartedPage goToMainPage() {
         driver.navigate().to(GetProperties.getProperties("config", "logoUrl"));
         return this;
     }
 
     public void clickOnSignInMenu() {
-        waiters.elementToBeClickable(getSignInMenu()).click();
+        waiters.fluentWaitVisibilityOfElement(getSignInMenu()).click();
     }
 
     public String getAccountGreetingText() {

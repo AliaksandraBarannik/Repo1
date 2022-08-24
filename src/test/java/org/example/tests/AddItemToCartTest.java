@@ -39,7 +39,7 @@ public class AddItemToCartTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void searchElement() {
-        startedPageService.navigate();
+        startedPageService.goToMainPage();
         resultPageService = startedPageService.fillSearchField("iPhone");
         resultPageService.clickOnSubmitButton();
         productPageService = resultPageService.clickOnFirstElementInListOfItems();

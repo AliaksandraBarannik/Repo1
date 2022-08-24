@@ -23,7 +23,7 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public WebElement getItemsPrice() {
-        return driver.findElement(By.xpath("//div//span[@id='sc-subtotal-amount-activecart']//span"));
+        return driver.findElement(By.xpath("//div[@class='sc-item-price-block']//span"));
     }
 
     public String getShoppingCartNameText() {
@@ -39,12 +39,13 @@ public class ShoppingCartPage extends BasePage {
         return getItemsName().getText();
     }
 
-    public String getItemFields(String fieldName) {
-        String itemFields = "//li//span[@class='a-size-small a-text-bold' and contains(text(),'%s')]//following-sibling::span";
-        return driver.findElement(By.xpath(String.format(itemFields, fieldName))).getText();
-    }
-
     public String getItemsPriceText() {
         return getItemsPrice().getText();
+    }
+
+    public String getListOfFieldsText(String key) {
+        String itemFields = "//span[@class='a-size-small a-text-bold' and contains(text(),'%s')]/following-sibling::span";
+        return driver.findElement(By.xpath(String.format(itemFields, key))).getText();
+
     }
 }

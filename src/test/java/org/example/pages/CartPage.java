@@ -47,6 +47,6 @@ public class CartPage extends BasePage {
     }
 
     public void clickOnGoToCartButton() {
-        waiters.elementToBeClickable(getGoToCartButton()).click();
+        waiters.fluentWaitVisibilityOfElement(getGoToCartButton()).click();
     }
 }

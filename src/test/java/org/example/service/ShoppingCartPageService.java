@@ -25,11 +25,11 @@ public class ShoppingCartPageService extends BasePageService {
         return shoppingCartPage.getItemsNameText();
     }
 
-    public String getItemFieldsText(String fieldName) {
-        return shoppingCartPage.getItemFields(fieldName);
-    }
-
     public String getItemPriceText() {
         return shoppingCartPage.getItemsPriceText();
+    }
+
+    public String getListOfFieldsText(String key) {
+        return shoppingCartPage.getListOfFieldsText(key);
     }
 }

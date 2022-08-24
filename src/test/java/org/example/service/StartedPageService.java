@@ -26,8 +26,8 @@ public class StartedPageService extends BasePageService {
         return new ResultPageService();
     }
 
-    public StartedPageService navigate() {
-        startedPage.navigate();
+    public StartedPageService goToMainPage() {
+        startedPage.goToMainPage();
         return this;
     }
 
