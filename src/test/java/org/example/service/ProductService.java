@@ -12,9 +12,12 @@ public class ProductService {
     private static final String PHONE_COLOR = GetProperties.getProperties("product", "phone_color");
     private static final String PHONE_SERVICE_PROVIDER = GetProperties.getProperties("product", "phone_serviceProvider");
     private static final String PHONE_PRICE = GetProperties.getProperties("product", "phone_price");
-    private static final String KINDLE_NAME = GetProperties.getProperties("product", "kindle_name");
-    private static final String KINDLE_OPTION = GetProperties.getProperties("product", "kindle_option");
-    private static final String KINDLE_COLOR = GetProperties.getProperties("product", "kindle_color");
+    private static final String GAMING_MOUSE_NAME = GetProperties.getProperties("product", "gaming_mouse_name").substring(0, 49);
+    private static final String GAMING_MOUSE_COLOR = GetProperties.getProperties("product", "gaming_mouse_color");
+    private static final String GAMING_MOUSE_PRICE = GetProperties.getProperties("product", "gaming_mouse_price");
+    private static final String HEADSET_NAME = GetProperties.getProperties("product", "headset_name").substring(0, 60);
+    private static final String HEADSET_STYLE = GetProperties.getProperties("product", "headset_style");
+    private static final String HEADSET_PRICE = GetProperties.getProperties("product", "headset_price");
 
     public Product getPhoneObjectFromProperties() {
         return new Product.ProductBuilder()
@@ -36,19 +39,35 @@ public class ProductService {
                 .build();
     }
 
-    public Product getKindleObjectFromProperties() {
+    public Product getHeadsetObjectFromProperties() {
         return new Product.ProductBuilder()
-                .withName(KINDLE_NAME)
-                .withOption(KINDLE_OPTION)
-                .withColor(KINDLE_COLOR)
+                .withName(HEADSET_NAME)
+                .withStyle(HEADSET_STYLE)
+                .withPrice(HEADSET_PRICE)
                 .build();
     }
 
-    public Product getActualKindleObject() {
+    public Product getHeadsetActualObject() {
         return new Product.ProductBuilder()
-                .withName(shoppingCartPageService.getItemNameText())
-                .withOption(shoppingCartPageService.getListOfFieldsText("Option"))
+                .withName(shoppingCartPageService.getItemNameText().substring(0, 60))
+                .withStyle(shoppingCartPageService.getListOfFieldsText("Style"))
+                .withPrice(shoppingCartPageService.getItemPriceText())
+                .build();
+    }
+
+    public Product getMouseObjectFromProperties() {
+        return new Product.ProductBuilder()
+                .withName(GAMING_MOUSE_NAME)
+                .withColor(GAMING_MOUSE_COLOR)
+                .withPrice(GAMING_MOUSE_PRICE)
+                .build();
+    }
+
+    public Product getActualMouseObject() {
+        return new Product.ProductBuilder()
+                .withName(shoppingCartPageService.getItemNameText().substring(0, 49))
                 .withColor(shoppingCartPageService.getListOfFieldsText("Color"))
+                .withPrice(shoppingCartPageService.getItemPriceText())
                 .build();
     }
 }

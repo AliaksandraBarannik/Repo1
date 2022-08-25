@@ -14,10 +14,6 @@ public class CartPage extends BasePage {
         return driver.findElement(By.xpath("//i[@class='a-icon a-icon-alert']"));
     }
 
-    public WebElement getDeleteProductButton() {
-        return driver.findElement(By.xpath("//input[@value='Delete']"));
-    }
-
     public WebElement getGoToCartButton() {
         return driver.findElement(By.xpath("//span//a[contains(@href,'gp/cart')]"));
     }
@@ -42,11 +38,8 @@ public class CartPage extends BasePage {
         return getConfirmedIconAddedToCart().getCssValue("color");
     }
 
-    public void clickOnDeleteButton() {
-        getDeleteProductButton().click();
+    public void clickOnGoToCartButton() {
+        waiters.fluentWaitElementToBeClickable(getGoToCartButton()).click();
     }
 
-    public void clickOnGoToCartButton() {
-        waiters.fluentWaitVisibilityOfElement(getGoToCartButton()).click();
-    }
 }

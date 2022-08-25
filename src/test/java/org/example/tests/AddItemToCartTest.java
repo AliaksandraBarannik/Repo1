@@ -82,6 +82,6 @@ public class AddItemToCartTest extends BaseTest {
     @AfterMethod(alwaysRun = true)
     public void deleteElementFromCart() {
         startedPageService.clickOnCartButton();
-        cartPageService.clickOnDeleteButton();
+        shoppingCartPageService.clickOnDeleteButton();
     }
 }

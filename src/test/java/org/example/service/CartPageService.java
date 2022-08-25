@@ -25,12 +25,6 @@ public class CartPageService extends BasePageService {
         return cartPage.getColor();
     }
 
-    public CartPageService clickOnDeleteButton() {
-        log.info("Click on 'Delete' button");
-        cartPage.clickOnDeleteButton();
-        return new CartPageService();
-    }
-
     public ShoppingCartPageService clickOnGoToCartButton() {
         log.info("Click on 'Go to cart' button");
         cartPage.clickOnGoToCartButton();

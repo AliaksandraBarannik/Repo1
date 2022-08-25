@@ -25,7 +25,7 @@ public class CompareObjectsInTheCartTest extends BaseTest {
     private StartedPageService startedPageService;
     private ResultPageService resultPageService;
     private CartPageService cartPageService;
-    private ShoppingCartPageService shoppingCartPageService;
+    private ShoppingCartPageService shoppingCartPageService = new ShoppingCartPageService();
     private LoginPageService loginPageService;
     private ProductService productService = new ProductService();
 
@@ -50,24 +50,38 @@ public class CompareObjectsInTheCartTest extends BaseTest {
         resultPageService.clickOnSubmitButton();
         productPageService = resultPageService.clickOnElementInTheList(GetProperties.getProperties("product", "phone_name"));
         cartPageService = productPageService.clickAddCartButton();
-        shoppingCartPageService = cartPageService.clickOnGoToCartButton();
+        shoppingCartPageService.goToSoppingCartPage();
+
         assertThat("These objects are not equal", productService.getActualPhoneObject(),
                 Matchers.equalTo(productService.getPhoneObjectFromProperties()));
     }
 
     @Test(description = "Task3")
-    public void checkKindleDescription() {
-        resultPageService = startedPageService.fillSearchField(GetProperties.getProperties("product", "kindle_searchname"));
+    public void checkGamingMouseDescription() {
+        resultPageService = startedPageService.fillSearchField(GetProperties.getProperties("product", "gaming_mouse_name"));
         resultPageService.clickOnSubmitButton();
-        productPageService = resultPageService.clickOnElementInTheList(GetProperties.getProperties("product", "kindle_name"));
+        productPageService = resultPageService.clickOnElementInTheList(GetProperties.getProperties("product", "gaming_mouse_name"));
         cartPageService = productPageService.clickAddCartButton();
-        shoppingCartPageService = cartPageService.clickOnGoToCartButton();
-        assertThat("This objects are not equal", String.valueOf(productService.getActualKindleObject()),
-                Matchers.equalTo(String.valueOf(productService.getKindleObjectFromProperties())));
+        shoppingCartPageService.goToSoppingCartPage();
+
+        assertThat("These objects are not equal", productService.getActualMouseObject(),
+                Matchers.equalTo(productService.getMouseObjectFromProperties()));
+    }
+
+    @Test(description = "Task3")
+    public void checkHeadsetDescription() {
+        resultPageService = startedPageService.fillSearchField(GetProperties.getProperties("product", "headset_name"));
+        resultPageService.clickOnSubmitButton();
+        productPageService = resultPageService.clickOnElementInTheList(GetProperties.getProperties("product", "headset_name"));
+        cartPageService = productPageService.clickAddCartButton();
+        shoppingCartPageService.goToSoppingCartPage();
+
+        assertThat("These objects are not equal", productService.getHeadsetActualObject(),
+                Matchers.equalTo(productService.getHeadsetObjectFromProperties()));
     }
 
     @AfterMethod(alwaysRun = true)
     public void deleteElementFromCart() {
-        cartPageService.clickOnDeleteButton();
+        shoppingCartPageService.clickOnDeleteButton();
     }
 }
