@@ -34,7 +34,6 @@ public class CompareObjectsInTheCartTest extends BaseTest {
         User user = UserService.credentials();
 
         startedPageService = new StartedPageService();
-        resultPageService = new ResultPageService();
         loginPageService = startedPageService.clickOnSignInMenu();
         startedPageService = loginPageService.logIn(user);
     }
