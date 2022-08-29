@@ -1,12 +1,9 @@
 package org.example.pages;
 
-import org.example.util.Waiters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class ProductPage extends BasePage {
-
-    Waiters waiters = new Waiters();
 
     public WebElement getAddToCartButton() {
         return driver.findElement(By.xpath("//input[@name='submit.add-to-cart']"));

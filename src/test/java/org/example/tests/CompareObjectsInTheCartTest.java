@@ -1,6 +1,7 @@
 package org.example.tests;
 
 import org.example.driver.BaseTest;
+import org.example.object.BaseProduct;
 import org.example.object.User;
 import org.example.service.CartPageService;
 import org.example.service.LoginPageService;
@@ -10,7 +11,6 @@ import org.example.service.ResultPageService;
 import org.example.service.ShoppingCartPageService;
 import org.example.service.StartedPageService;
 import org.example.service.UserService;
-import org.example.util.GetProperties;
 import org.hamcrest.Matchers;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -43,41 +43,41 @@ public class CompareObjectsInTheCartTest extends BaseTest {
         startedPageService.goToMainPage();
     }
 
-    @Test(description = "Task3")
-    public void checkPhoneDescription() {
-        resultPageService = startedPageService.fillSearchField(GetProperties.getProperties("product", "phone_name"));
-        resultPageService.clickOnSubmitButton();
-        productPageService = resultPageService.clickOnElementInTheList(GetProperties.getProperties("product", "phone_name"));
-        cartPageService = productPageService.clickAddCartButton();
-        shoppingCartPageService.goToSoppingCartPage();
-
-        assertThat("These objects are not equal", productService.getActualPhoneObject(),
-                Matchers.equalTo(productService.getPhoneObjectFromProperties()));
-    }
-
-    @Test(description = "Task3")
-    public void checkGamingMouseDescription() {
-        resultPageService = startedPageService.fillSearchField(GetProperties.getProperties("product", "gaming_mouse_name"));
-        resultPageService.clickOnSubmitButton();
-        productPageService = resultPageService.clickOnElementInTheList(GetProperties.getProperties("product", "gaming_mouse_name"));
-        cartPageService = productPageService.clickAddCartButton();
-        shoppingCartPageService.goToSoppingCartPage();
-
-        assertThat("These objects are not equal", productService.getActualMouseObject(),
-                Matchers.equalTo(productService.getMouseObjectFromProperties()));
-    }
-
-    @Test(description = "Task3")
-    public void checkHeadsetDescription() {
-        resultPageService = startedPageService.fillSearchField(GetProperties.getProperties("product", "headset_name"));
-        resultPageService.clickOnSubmitButton();
-        productPageService = resultPageService.clickOnElementInTheList(GetProperties.getProperties("product", "headset_name"));
-        cartPageService = productPageService.clickAddCartButton();
-        shoppingCartPageService.goToSoppingCartPage();
-
-        assertThat("These objects are not equal", productService.getHeadsetActualObject(),
-                Matchers.equalTo(productService.getHeadsetObjectFromProperties()));
-    }
+//    @Test(description = "Task3")
+//    public void checkPhoneDescription() {
+//        resultPageService = startedPageService.fillSearchField(BaseProduct.getProductFromProperties("3").get(0));
+//        resultPageService.clickOnSubmitButton();
+//        productPageService = resultPageService.clickOnElementInTheList(BaseProduct.getProductFromProperties("3").get(0));
+//        cartPageService = productPageService.clickAddCartButton();
+//        shoppingCartPageService = cartPageService.clickOnGoToCartButton();
+//
+//        assertThat("These objects are not equal", productService.getActualPhoneObject(),
+//                Matchers.equalTo(productService.getPhoneProduct()));
+//    }
+//
+//    @Test(description = "Task3")
+//    public void checkGamingMouseDescription() {
+//        resultPageService = startedPageService.fillSearchField(BaseProduct.getProductFromProperties("3.1").get(0));
+//        resultPageService.clickOnSubmitButton();
+//        productPageService = resultPageService.clickOnElementInTheList(BaseProduct.getProductFromProperties("3.1").get(0));
+//        cartPageService = productPageService.clickAddCartButton();
+//        shoppingCartPageService = cartPageService.clickOnGoToCartButton();
+//
+//        assertThat("These objects are not equal", productService.getActualMouseObject(),
+//                Matchers.equalTo(productService.getGamingMouseProduct()));
+//    }
+//
+//    @Test(description = "Task3")
+//    public void checkHeadsetDescription() {
+//        resultPageService = startedPageService.fillSearchField(BaseProduct.getProductFromProperties("3.2").get(0));
+//        resultPageService.clickOnSubmitButton();
+//        productPageService = resultPageService.clickOnElementInTheList(BaseProduct.getProductFromProperties("3.2").get(0));
+//        cartPageService = productPageService.clickAddCartButton();
+//        shoppingCartPageService = cartPageService.clickOnGoToCartButton();
+//
+//        assertThat("These objects are not equal", productService.getHeadsetActualObject(),
+//                Matchers.equalTo(productService.getHeadSetProduct()));
+//    }
 
     @AfterMethod(alwaysRun = true)
     public void deleteElementFromCart() {

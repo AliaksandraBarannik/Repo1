@@ -38,8 +38,8 @@ public class ShoppingCartPageService extends BasePageService {
         return price;
     }
 
-    public String getListOfFieldsText(String key) {
-        String fieldValue = shoppingCartPage.getListOfFieldsText(key);
+    public String getProductFieldValueByFieldNameText(String key) {
+        String fieldValue = shoppingCartPage.getProductFieldValueByFieldNameText(key);
         log.info("Get field value - " + fieldValue);
         return fieldValue;
     }

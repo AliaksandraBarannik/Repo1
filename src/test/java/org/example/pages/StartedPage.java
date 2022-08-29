@@ -1,13 +1,10 @@
 package org.example.pages;
 
-import org.example.util.Waiters;
 import org.example.util.GetProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class StartedPage extends BasePage {
-
-    Waiters waiters = new Waiters();
 
     public WebElement getAccountName() {
         return driver.findElement(By.xpath("//span[@id='nav-link-accountList-nav-line-1']"));
@@ -31,7 +28,12 @@ public class StartedPage extends BasePage {
     }
 
     public void clickOnSignInMenu() {
-        waiters.fluentWaitElementToBeClickable(getSignInMenu()).click();
+        if (getSignInMenu().isDisplayed()) {
+            getSignInMenu().click();
+        } else if (!getSignInMenu().isDisplayed()) {
+            goToMainPage();
+            getSignInMenu().click();
+        }
     }
 
     public String getAccountGreetingText() {

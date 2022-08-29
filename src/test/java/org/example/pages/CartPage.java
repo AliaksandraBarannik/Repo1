@@ -1,12 +1,9 @@
 package org.example.pages;
 
-import org.example.util.Waiters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class CartPage extends BasePage {
-
-    Waiters waiters = new Waiters();
 
     private final String ITEM_INFORMATION_CARD = "//div[@id='sw-atc-details-single-container']";
 
