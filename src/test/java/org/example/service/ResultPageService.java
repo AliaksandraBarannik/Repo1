@@ -26,4 +26,9 @@ public class ResultPageService extends BasePageService {
         resultPage.clickOnElement(element);
         return new ProductPageService();
     }
+
+    public void clickOnSearchButton() {
+        log.info("Click on Search button");
+        resultPage.clickOnSearchButton();
+    }
 }

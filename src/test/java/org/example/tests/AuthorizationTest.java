@@ -7,10 +7,12 @@ import org.example.object.User;
 import org.example.service.UserService;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
+@Ignore
 public class AuthorizationTest extends BaseTest {
 
     private StartedPageService startedPageService;

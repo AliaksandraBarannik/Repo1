@@ -12,6 +12,7 @@ public class BaseTest {
     public void setUp() {
         driver = Driver.getDriver();
         Driver.openURL();
+        Driver.waiters();
     }
 
     @AfterClass(alwaysRun = true)

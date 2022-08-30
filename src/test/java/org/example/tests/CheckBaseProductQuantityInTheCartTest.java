@@ -23,12 +23,12 @@ public class CheckBaseProductQuantityInTheCartTest extends BaseTest {
 
     @BeforeClass(alwaysRun = true)
     public void registration() {
-        User user = UserService.credentials();
+//        User user = UserService.credentials();
 
         startedPageService = new StartedPageService();
         resultPageService = new ResultPageService();
-        loginPageService = startedPageService.clickOnSignInMenu();
-        startedPageService = loginPageService.logIn(user);
+//        loginPageService = startedPageService.clickOnSignInMenu();
+//        startedPageService = loginPageService.logIn(user);
     }
 
     @BeforeMethod

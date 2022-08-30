@@ -12,6 +12,10 @@ public class ResultPage extends BasePage {
         return driver.findElements(By.xpath("//a[@class='a-link-normal s-no-outline']"));
     }
 
+    public WebElement getSearchButton() {
+        return driver.findElement(By.xpath("//input[@id='nav-search-submit-button']"));
+    }
+
     public List<String> getListOfItemsNamesText() {
         return CommonMethodsForList.getItemsNamesText(getListOfItems());
     }
@@ -23,5 +27,14 @@ public class ResultPage extends BasePage {
     public void clickOnElement(String element) {
         String nameOfElementInTheResultList = "//a[contains(@class,'s-underline-link-text')]//span[text()='%s']";
         driver.findElement(By.xpath(String.format(nameOfElementInTheResultList, element))).click();
+    }
+
+    public void clickOnSearchButton() {
+        if (getSearchButton().isDisplayed()) {
+            getSearchButton().click();
+        }else{
+            waiters.fluentWaitVisibilityOfElement(getSearchButton());
+            getSearchButton().click();
+        }
     }
 }

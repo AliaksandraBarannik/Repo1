@@ -15,21 +15,22 @@ public class SearchBaseProductTest extends BaseTest {
 
     private StartedPageService startedPageService;
     private ResultPageService resultPageService;
-    private LoginPageService loginPageService;
+//    private LoginPageService loginPageService;
 
-    @BeforeMethod(alwaysRun = true)
-    public void registration() {
-        User user = UserService.credentials();
-
-        startedPageService = new StartedPageService();
-        loginPageService = startedPageService.clickOnSignInMenu();
-        startedPageService = loginPageService.logIn(user);
-    }
+//    @BeforeMethod(alwaysRun = true)
+//    public void registration() {
+//        User user = UserService.credentials();
+//
+//        startedPageService = new StartedPageService();
+//        loginPageService = startedPageService.clickOnSignInMenu();
+//        startedPageService = loginPageService.logIn(user);
+//    }
 
     @Test(description = "1.2")
     public void checkSearch() {
+        startedPageService = new StartedPageService();
         resultPageService = startedPageService.fillSearchField("iPhone");
-        resultPageService.clickOnSubmitButton();
+        resultPageService.clickOnSearchButton();
         assertThat("List of items is empty", !resultPageService.isListEmpty());
     }
 }
