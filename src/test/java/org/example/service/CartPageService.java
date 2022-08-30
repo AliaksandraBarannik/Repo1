@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 public class CartPageService extends BasePageService {
 
     public static final Logger log = Logger.getLogger(CartPageService.class.getName());
-    CartPage cartPage = new CartPage();
+    private CartPage cartPage = new CartPage();
 
     public boolean isProductImageDisplayed() {
         boolean result = cartPage.isProductImageDisplayed();

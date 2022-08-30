@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 public class ResultPageService extends BasePageService {
 
     public static final Logger log = Logger.getLogger(ResultPageService.class.getName());
-    ResultPage resultPage = new ResultPage();
+    private ResultPage resultPage = new ResultPage();
 
     public boolean isListEmpty() {
         boolean result = resultPage.getListOfItemsNamesText().isEmpty();

@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 public class StartedPageService extends BasePageService {
 
     public static final Logger log = Logger.getLogger(StartedPageService.class.getName());
-    StartedPage startedPage = new StartedPage();
+    private StartedPage startedPage = new StartedPage();
 
     public LoginPageService clickOnSignInMenu() {
         log.info("Click on 'Sign in' menu button");

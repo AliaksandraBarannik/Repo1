@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class ShoppingCartPageService extends BasePageService {
 
     public static final Logger log = Logger.getLogger(ShoppingCartPageService.class.getName());
-    ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
+    private ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
 
     public ShoppingCartPageService goToSoppingCartPage() {
         shoppingCartPage.goToSoppingCartPage();

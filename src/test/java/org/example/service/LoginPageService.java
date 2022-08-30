@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 public class LoginPageService extends BasePageService {
 
     public static final Logger log = Logger.getLogger(LoginPageService.class.getName());
-    LoginPage loginPage = new LoginPage();
+    private LoginPage loginPage = new LoginPage();
 
     public void addEmail(String email) {
         log.info("Add email");

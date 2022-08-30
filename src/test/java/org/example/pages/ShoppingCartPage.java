@@ -34,7 +34,7 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public String getShoppingCartNameText() {
-        return getShoppingCartText().getText();
+        return waiters.fluentWaitVisibilityOfElement(getShoppingCartText()).getText();
     }
 
     public boolean isListOfElementsInTheShoppingCartEmpty() {

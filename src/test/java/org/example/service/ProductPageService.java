@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 public class ProductPageService extends BasePageService {
 
     public static final java.util.logging.Logger log = Logger.getLogger(ProductPageService.class.getName());
-    ProductPage productPage = new ProductPage();
+    private ProductPage productPage = new ProductPage();
 
     public int getQuantityOfItemsInTheCart() {
         return productPage.getQuantityOfItemsInTheCart();
