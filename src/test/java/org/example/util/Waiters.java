@@ -36,7 +36,7 @@ public class Waiters {
 
     public WebElement fluentWaitElementToBeClickable(WebElement element){
         Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(6))
+                .withTimeout(Duration.ofSeconds(5))
                 .pollingEvery(Duration.ofSeconds(2))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(TimeoutException.class);

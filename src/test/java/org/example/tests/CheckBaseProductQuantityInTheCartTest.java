@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class CheckProductQuantityInTheCartTest extends BaseTest {
+public class CheckBaseProductQuantityInTheCartTest extends BaseTest {
 
     private ProductPageService productPageService;
     private StartedPageService startedPageService;

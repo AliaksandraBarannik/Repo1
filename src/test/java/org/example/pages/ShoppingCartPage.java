@@ -1,15 +1,12 @@
 package org.example.pages;
 
 import org.example.util.GetProperties;
-import org.example.util.Waiters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
 public class ShoppingCartPage extends BasePage {
-
-    Waiters waiters = new Waiters();
 
     public ShoppingCartPage goToSoppingCartPage() {
         driver.navigate().to(GetProperties.getProperties("config", "shoppingCartUrl"));
@@ -29,7 +26,7 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public WebElement getItemsPrice() {
-        return driver.findElement(By.xpath("//span[@id='sc-subtotal-amount-activecart']//span[@class='a-size-medium a-color-base sc-price sc-white-space-nowrap']"));
+        return driver.findElement(By.xpath("//span[contains(@id,'activecart')]//span[contains(@class,'sc-price')]"));
     }
 
     public WebElement getDeleteProductButton() {
@@ -53,7 +50,7 @@ public class ShoppingCartPage extends BasePage {
         return getItemsPrice().getText();
     }
 
-    public String getListOfFieldsText(String key) {
+    public String getProductFieldValueByFieldNameText(String key) {
         String itemFields = "//span[@class='a-size-small a-text-bold' and contains(text(),'%s')]/following-sibling::span";
         return driver.findElement(By.xpath(String.format(itemFields, key))).getText();
     }

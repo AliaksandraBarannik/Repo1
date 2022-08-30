@@ -1,12 +1,9 @@
 package org.example.pages;
 
-import org.example.util.Waiters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class CartPage extends BasePage {
-
-    Waiters waiters = new Waiters();
 
     private final String ITEM_INFORMATION_CARD = "//div[@id='sw-atc-details-single-container']";
 
@@ -15,7 +12,7 @@ public class CartPage extends BasePage {
     }
 
     public WebElement getGoToCartButton() {
-        return driver.findElement(By.xpath("//span//a[contains(@href,'gp/cart')]"));
+        return driver.findElement(By.xpath("(//span//a[contains(@href,'gp/cart')])[1]"));
     }
 
     public WebElement getMsgAboutAddedItemToCart() {
@@ -39,7 +36,12 @@ public class CartPage extends BasePage {
     }
 
     public void clickOnGoToCartButton() {
-        waiters.fluentWaitElementToBeClickable(getGoToCartButton()).click();
+        if(waiters.fluentWaitVisibilityOfElement(getGoToCartButton()).isDisplayed()) {
+            getGoToCartButton().click();
+        } else {
+            driver.navigate().refresh();
+            waiters.fluentWaitVisibilityOfElement(getGoToCartButton()).click();
+        }
     }
 
 }
