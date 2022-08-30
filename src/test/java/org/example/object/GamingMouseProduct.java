@@ -2,6 +2,7 @@ package org.example.object;
 
 import lombok.Data;
 
+import java.util.List;
 import java.util.Objects;
 
 @Data
@@ -12,18 +13,9 @@ public class GamingMouseProduct extends BaseProduct {
     public GamingMouseProduct() {
     }
 
-    public GamingMouseProduct(String name, String price, String color) {
-        super(name, price);
-        this.color = color;
-    }
-
-    public GamingMouseProduct createGamingMouseProduct(){
-        GamingMouseProduct gamingMouseProduct = new GamingMouseProduct();
-        String productName = shoppingCartPageService.getItemNameText().substring(0,40);
-        gamingMouseProduct.setName(productName);
-        gamingMouseProduct.setColor(shoppingCartPageService.getProductFieldValueByFieldNameText("Color"));
-        gamingMouseProduct.setPrice(shoppingCartPageService.getItemPriceText());
-        return gamingMouseProduct;
+    public GamingMouseProduct(List<String> data) {
+        super(data);
+        this.color = data.get(2);
     }
 
     @Override

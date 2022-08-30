@@ -1,11 +1,13 @@
 package org.example.tests;
 
 import org.example.driver.BaseTest;
+import org.example.object.GamingMouseProduct;
+import org.example.object.HeadsetProduct;
+import org.example.object.PhoneProduct;
 import org.example.object.User;
 import org.example.service.CartPageService;
 import org.example.service.LoginPageService;
 import org.example.service.ProductPageService;
-import org.example.service.ProductService;
 import org.example.service.ResultPageService;
 import org.example.service.ShoppingCartPageService;
 import org.example.service.StartedPageService;
@@ -29,7 +31,6 @@ public class CompareObjectsInTheCartTest extends BaseTest {
     private CartPageService cartPageService;
     private ShoppingCartPageService shoppingCartPageService = new ShoppingCartPageService();
     private LoginPageService loginPageService;
-    private ProductService productService = new ProductService();
     private List<String> list;
 
     @BeforeClass(alwaysRun = true)
@@ -49,40 +50,45 @@ public class CompareObjectsInTheCartTest extends BaseTest {
     @Test(description = "Task3")
     public void checkPhoneDescription() {
         list = ReadDataFromFile.getDataFromProperties("3");
-        resultPageService = startedPageService.fillSearchField(list.get(0));
+        PhoneProduct expectedPhone = new PhoneProduct(list);
+        resultPageService = startedPageService.fillSearchField(expectedPhone.getName());
         resultPageService.clickOnSubmitButton();
-        productPageService = resultPageService.clickOnElementInTheList(list.get(0));
+        productPageService = resultPageService.clickOnElementInTheList((expectedPhone.getName()));
         cartPageService = productPageService.clickAddCartButton();
         shoppingCartPageService = cartPageService.clickOnGoToCartButton();
 
-        assertThat("These objects are not equal", productService.getActualPhoneObject(),
-                Matchers.equalTo(productService.getPhoneProduct(list)));
+        assertThat("These objects are not equal", shoppingCartPageService.getActualPhoneProduct(),
+                Matchers.equalTo(expectedPhone));
     }
 
     @Test(description = "Task3")
     public void checkGamingMouseDescription() {
         list = ReadDataFromFile.getDataFromProperties("3.1");
-        resultPageService = startedPageService.fillSearchField(list.get(0));
+        GamingMouseProduct expectedGamingMouse = new GamingMouseProduct(list);
+        resultPageService = startedPageService.fillSearchField(expectedGamingMouse.getName());
         resultPageService.clickOnSubmitButton();
-        productPageService = resultPageService.clickOnElementInTheList(list.get(0));
+        productPageService = resultPageService.clickOnElementInTheList(expectedGamingMouse.getName());
         cartPageService = productPageService.clickAddCartButton();
         shoppingCartPageService = cartPageService.clickOnGoToCartButton();
+        expectedGamingMouse.setName(expectedGamingMouse.getName().substring(0, 40));
 
-        assertThat("These objects are not equal", productService.getActualGamingMouseObject(),
-                Matchers.equalTo(productService.getGamingMouseProduct(list)));
+        assertThat("These objects are not equal", shoppingCartPageService.getActualGamingMouseProduct(),
+                Matchers.equalTo(expectedGamingMouse));
     }
 
     @Test(description = "Task3")
     public void checkHeadsetDescription() {
         list = ReadDataFromFile.getDataFromProperties("3.2");
-        resultPageService = startedPageService.fillSearchField(list.get(0));
+        HeadsetProduct expectedHeadset = new HeadsetProduct(list);
+        resultPageService = startedPageService.fillSearchField(expectedHeadset.getName());
         resultPageService.clickOnSubmitButton();
-        productPageService = resultPageService.clickOnElementInTheList(list.get(0));
+        productPageService = resultPageService.clickOnElementInTheList(expectedHeadset.getName());
         cartPageService = productPageService.clickAddCartButton();
         shoppingCartPageService = cartPageService.clickOnGoToCartButton();
+        expectedHeadset.setName(expectedHeadset.getName().substring(0, 40));
 
-        assertThat("These objects are not equal", productService.getActualHeadsetObject(),
-                Matchers.equalTo(productService.getHeadsetProduct(list)));
+        assertThat("These objects are not equal", shoppingCartPageService.getActualHeadsetProduct(),
+                Matchers.equalTo(expectedHeadset));
     }
 
     @AfterMethod(alwaysRun = true)

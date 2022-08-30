@@ -28,7 +28,12 @@ public class StartedPage extends BasePage {
     }
 
     public void clickOnSignInMenu() {
-        waiters.fluentWaitElementToBeClickable(getSignInMenu()).click();
+        if (getSignInMenu().isDisplayed()) {
+            getSignInMenu().click();
+        } else {
+            driver.navigate().refresh();
+            waiters.fluentWaitVisibilityOfElement(getSignInMenu()).click();
+        }
     }
 
     public String getAccountGreetingText() {

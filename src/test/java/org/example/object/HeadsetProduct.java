@@ -2,6 +2,7 @@ package org.example.object;
 
 import lombok.Data;
 
+import java.util.List;
 import java.util.Objects;
 
 @Data
@@ -12,18 +13,9 @@ public class HeadsetProduct extends BaseProduct {
     public HeadsetProduct() {
     }
 
-    public HeadsetProduct(String name, String price, String style) {
-        super(name, price);
-        this.style = style;
-    }
-
-    public HeadsetProduct createHeadsetProduct() {
-        HeadsetProduct headsetProduct = new HeadsetProduct();
-        String productName = shoppingCartPageService.getItemNameText().substring(0,40);
-        headsetProduct.setName(productName);
-        headsetProduct.setPrice(shoppingCartPageService.getItemPriceText());
-        headsetProduct.setStyle(shoppingCartPageService.getProductFieldValueByFieldNameText("Style"));
-        return headsetProduct;
+    public HeadsetProduct(List<String> data) {
+        super(data);
+        this.style = data.get(5);
     }
 
     @Override

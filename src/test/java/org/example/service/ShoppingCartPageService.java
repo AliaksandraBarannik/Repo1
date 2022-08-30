@@ -1,5 +1,8 @@
 package org.example.service;
 
+import org.example.object.GamingMouseProduct;
+import org.example.object.HeadsetProduct;
+import org.example.object.PhoneProduct;
 import org.example.pages.ShoppingCartPage;
 
 import java.util.logging.Logger;
@@ -48,5 +51,34 @@ public class ShoppingCartPageService extends BasePageService {
         log.info("Click on 'Delete' button");
         shoppingCartPage.clickOnDeleteButton();
         return new ShoppingCartPageService();
+    }
+
+    public PhoneProduct getActualPhoneProduct() {
+        PhoneProduct phoneProduct = new PhoneProduct();
+        String productName = getItemNameText();
+        phoneProduct.setName(productName);
+        phoneProduct.setSize(getProductFieldValueByFieldNameText("Size"));
+        phoneProduct.setColor(getProductFieldValueByFieldNameText("Color"));
+        phoneProduct.setServiceProvider(getProductFieldValueByFieldNameText("Service Provider"));
+        phoneProduct.setPrice(getItemPriceText());
+        return phoneProduct;
+    }
+
+    public GamingMouseProduct getActualGamingMouseProduct() {
+        GamingMouseProduct gamingMouseProduct = new GamingMouseProduct();
+        String productName = getItemNameText().substring(0, 40);
+        gamingMouseProduct.setName(productName);
+        gamingMouseProduct.setColor(getProductFieldValueByFieldNameText("Color"));
+        gamingMouseProduct.setPrice(getItemPriceText());
+        return gamingMouseProduct;
+    }
+
+    public HeadsetProduct getActualHeadsetProduct() {
+        HeadsetProduct headsetProduct = new HeadsetProduct();
+        String productName = getItemNameText().substring(0, 40);
+        headsetProduct.setName(productName);
+        headsetProduct.setPrice(getItemPriceText());
+        headsetProduct.setStyle(getProductFieldValueByFieldNameText("Style"));
+        return headsetProduct;
     }
 }

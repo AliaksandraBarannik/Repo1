@@ -2,8 +2,8 @@ package org.example.object;
 
 import lombok.Data;
 
+import java.util.List;
 import java.util.Objects;
-
 
 @Data
 public class PhoneProduct extends BaseProduct {
@@ -16,22 +16,11 @@ public class PhoneProduct extends BaseProduct {
     public PhoneProduct() {
     }
 
-    public PhoneProduct(String name, String price, String size, String color, String serviceProvider) {
-        super(name, price);
-        this.size = size;
-        this.color = color;
-        this.serviceProvider = serviceProvider;
-    }
-
-    public PhoneProduct createPhoneProduct(){
-        PhoneProduct phoneProduct = new PhoneProduct();
-        String productName = shoppingCartPageService.getItemNameText();
-        phoneProduct.setName(productName);
-        phoneProduct.setSize(shoppingCartPageService.getProductFieldValueByFieldNameText("Size"));
-        phoneProduct.setColor(shoppingCartPageService.getProductFieldValueByFieldNameText("Color"));
-        phoneProduct.setServiceProvider(shoppingCartPageService.getProductFieldValueByFieldNameText("Service Provider"));
-        phoneProduct.setPrice(shoppingCartPageService.getItemPriceText());
-        return phoneProduct;
+    public PhoneProduct(List<String> data) {
+        super(data);
+        this.size = data.get(1);
+        this.color = data.get(2);
+        this.serviceProvider = data.get(3);
     }
 
     @Override

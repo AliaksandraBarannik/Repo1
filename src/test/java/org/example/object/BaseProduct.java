@@ -1,8 +1,6 @@
 package org.example.object;
 
-
 import lombok.Data;
-import org.example.service.ShoppingCartPageService;
 
 import java.util.List;
 import java.util.Objects;
@@ -10,19 +8,16 @@ import java.util.Objects;
 @Data
 public class BaseProduct {
 
-    ShoppingCartPageService shoppingCartPageService = new ShoppingCartPageService();
-
-    protected List<String> list;
-
     private String name;
     private String price;
 
-    public BaseProduct(String name, String price) {
-        this.name = name;
-        this.price = price;
+    public BaseProduct(List<String> data) {
+        this.name = data.get(0);
+        this.price = data.get(4);
     }
 
-    public BaseProduct() {}
+    public BaseProduct() {
+    }
 
     @Override
     public boolean equals(Object o) {
