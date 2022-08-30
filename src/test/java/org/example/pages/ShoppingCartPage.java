@@ -1,34 +1,61 @@
 package org.example.pages;
 
-import org.openqa.selenium.WebDriver;
+import org.example.util.GetProperties;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
-public class ShoppingCartPage extends InitDriver {
+public class ShoppingCartPage extends BasePage {
 
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-
-    @FindBy(xpath = "//div[@data-name='Active Cart']//div[@class='a-row']//*[contains(text(),'Shopping Cart')]")
-    private WebElement shoppingCart;
-
-    @FindBy(xpath = "//div[@class='a-fixed-left-grid']//img[contains(@src,'images') and @class='sc-product-image']")
-    private List<WebElement> listOfElementsInTheShoppingCart;
-
-    public ShoppingCartPage(WebDriver driver) {
-        super(driver);
+    public ShoppingCartPage goToSoppingCartPage() {
+        driver.navigate().to(GetProperties.getProperties("config", "shoppingCartUrl"));
+        return this;
     }
 
-    public boolean isShoppingCartDisplayed() {
-        return shoppingCart.isDisplayed();
+    public WebElement getShoppingCartText() {
+        return driver.findElement(By.xpath("//div[contains(@class,'sc-compact-bottom')]/div[1]"));
+    }
+
+    public List<WebElement> getListOfElementsInTheShoppingCart() {
+        return driver.findElements(By.xpath("//img[@class='sc-product-image']"));
+    }
+
+    public WebElement getItemsName() {
+        return waiters.fluentWaitVisibilityOfElement(driver.findElement(By.xpath("//div//span[@class='a-truncate-cut']")));
+    }
+
+    public WebElement getItemsPrice() {
+        return driver.findElement(By.xpath("//span[contains(@id,'activecart')]//span[contains(@class,'sc-price')]"));
+    }
+
+    public WebElement getDeleteProductButton() {
+        return driver.findElement(By.xpath("//input[@value='Delete']"));
+    }
+
+    public String getShoppingCartNameText() {
+        return getShoppingCartText().getText();
     }
 
     public boolean isListOfElementsInTheShoppingCartEmpty() {
-        wait.until(ExpectedConditions.visibilityOfAllElements(listOfElementsInTheShoppingCart));
-        return listOfElementsInTheShoppingCart.isEmpty();
+        waiters.elementsToBeVisible(getListOfElementsInTheShoppingCart());
+        return getListOfElementsInTheShoppingCart().isEmpty();
+    }
+
+    public String getItemsNameText() {
+        return getItemsName().getText();
+    }
+
+    public String getItemsPriceText() {
+        return getItemsPrice().getText();
+    }
+
+    public String getProductFieldValueByFieldNameText(String fieldName) {
+        String itemFields = "//span[@class='a-size-small a-text-bold' and contains(text(),'%s')]/following-sibling::span";
+        return driver.findElement(By.xpath(String.format(itemFields, fieldName))).getText();
+    }
+
+    public void clickOnDeleteButton() {
+        getDeleteProductButton().click();
     }
 }

@@ -1,36 +1,25 @@
 package org.example.pages;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends InitDriver {
+public class LoginPage extends BasePage {
 
-    @FindBy(xpath = "//div[@class='a-section']//input[@name='email']")
-    private WebElement fillEmail;
+    public WebElement getEmailField() {
+        return driver.findElement(By.xpath("//input[@name='email']"));
+    }
 
-    @FindBy(xpath = "//input[@type='submit']")
-    private WebElement submit;
-
-    @FindBy(xpath = "//div[@class='a-section']//input[@name='password']")
-    private WebElement fillPassword;
-
-    public LoginPage(WebDriver driver) {
-        super(driver);
+    public WebElement getPasswordField() {
+        return driver.findElement(By.xpath("//input[@name='password']"));
     }
 
     public void addEmail(String email) {
-        log.info("Add email");
-        fillEmail.sendKeys(email);
-    }
-
-    public void clickOnSubmitButton() {
-        log.info("click on submit");
-        submit.click();
+        getEmailField().clear();
+        getEmailField().sendKeys(email);
     }
 
     public void addPassword(String password) {
-        log.info("add password");
-        fillPassword.sendKeys(password);
+        getPasswordField().clear();
+        getPasswordField().sendKeys(password);
     }
 }

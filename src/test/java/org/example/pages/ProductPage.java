@@ -1,31 +1,28 @@
 package org.example.pages;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
-public class ProductPage extends InitDriver {
+public class ProductPage extends BasePage {
 
-    @FindBy(xpath = "//header//a[contains(@href,'nav_cart')]//span")
-    private WebElement itemsInTheCart;
+    public WebElement getAddToCartButton() {
+        return driver.findElement(By.xpath("//input[@name='submit.add-to-cart']"));
+    }
 
-    @FindBy(xpath = "//div//input[@name='submit.add-to-cart']")
-    private WebElement addToCartButton;
-
-    public ProductPage(WebDriver driver) {
-        super(driver);
+    public WebElement getItemsInTheCart() {
+        return driver.findElement(By.xpath("//span[@id='nav-cart-count']"));
     }
 
     public int getQuantityOfItemsInTheCart() {
-        String str = itemsInTheCart.getText();
-        return Integer.parseInt(str.trim());
+        String getQuantityOfItemsInTheCartText = getItemsInTheCart().getText();
+        return Integer.parseInt(getQuantityOfItemsInTheCartText.trim());
     }
 
     public boolean isAddToCartButtonDisplayed() {
-        return addToCartButton.isDisplayed();
+        return getAddToCartButton().isDisplayed();
     }
 
     public void clickAddCartButton() {
-        addToCartButton.click();
+        waiters.fluentWaitElementToBeClickable(getAddToCartButton()).click();
     }
 }
