@@ -19,4 +19,9 @@ public class ResultPage extends BasePage {
     public void clickOnFirstElementInListOfItems() {
         CommonMethodsForList.clickOnFirstElementInListOfItems(getListOfItems());
     }
+
+    public void clickOnElement(String element) {
+        String nameOfElementInTheResultList = "//a[contains(@class,'s-underline-link-text')]//span[text()='%s']";
+        driver.findElement(By.xpath(String.format(nameOfElementInTheResultList, element))).click();
+    }
 }

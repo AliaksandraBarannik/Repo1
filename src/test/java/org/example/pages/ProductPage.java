@@ -23,6 +23,6 @@ public class ProductPage extends BasePage {
     }
 
     public void clickAddCartButton() {
-        getAddToCartButton().click();
+        waiters.fluentWaitElementToBeClickable(getAddToCartButton()).click();
     }
 }

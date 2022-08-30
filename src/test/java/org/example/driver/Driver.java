@@ -1,7 +1,7 @@
 package org.example.driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.example.util.Config;
+import org.example.util.GetProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -29,6 +29,6 @@ public class Driver {
     }
 
     public static void openURL() {
-        driver.get(Config.getProperties("mainUrl"));
+        driver.get(GetProperties.getProperties("config", "mainUrl"));
     }
 }

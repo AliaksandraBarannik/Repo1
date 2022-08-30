@@ -20,4 +20,10 @@ public class ResultPageService extends BasePageService {
         resultPage.clickOnFirstElementInListOfItems();
         return new ProductPageService();
     }
+
+    public ProductPageService clickOnElementInTheList(String element) {
+        log.info("Click on the element in list");
+        resultPage.clickOnElement(element);
+        return new ProductPageService();
+    }
 }

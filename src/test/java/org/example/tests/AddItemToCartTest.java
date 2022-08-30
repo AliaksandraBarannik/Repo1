@@ -9,7 +9,7 @@ import org.example.service.ShoppingCartPageService;
 import org.example.service.StartedPageService;
 import org.example.object.User;
 import org.example.service.UserService;
-import org.example.util.Config;
+import org.example.util.GetProperties;
 import org.hamcrest.Matchers;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -39,7 +39,7 @@ public class AddItemToCartTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void searchElement() {
-        startedPageService.navigate();
+        startedPageService.goToMainPage();
         resultPageService = startedPageService.fillSearchField("iPhone");
         resultPageService.clickOnSubmitButton();
         productPageService = resultPageService.clickOnFirstElementInListOfItems();
@@ -58,7 +58,7 @@ public class AddItemToCartTest extends BaseTest {
 
     @Test(description = "1.3")
     public void isIconColorGreen() {
-        assertThat("Color is not green", cartPageService.getColor(), Matchers.equalTo(Config.getProperties("greenColor")));
+        assertThat("Color is not green", cartPageService.getColor(), Matchers.equalTo(GetProperties.getProperties("config", "greenColor")));
     }
 
     @Test(description = "1.3")
@@ -82,6 +82,6 @@ public class AddItemToCartTest extends BaseTest {
     @AfterMethod(alwaysRun = true)
     public void deleteElementFromCart() {
         startedPageService.clickOnCartButton();
-        cartPageService.clickOnDeleteButton();
+        shoppingCartPageService.clickOnDeleteButton();
     }
 }

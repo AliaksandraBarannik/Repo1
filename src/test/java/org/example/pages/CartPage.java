@@ -1,12 +1,9 @@
 package org.example.pages;
 
-import org.example.util.Waiters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class CartPage extends BasePage {
-
-    Waiters waiters = new Waiters();
 
     private final String ITEM_INFORMATION_CARD = "//div[@id='sw-atc-details-single-container']";
 
@@ -14,12 +11,8 @@ public class CartPage extends BasePage {
         return driver.findElement(By.xpath("//i[@class='a-icon a-icon-alert']"));
     }
 
-    public WebElement getDeleteProductButton() {
-        return driver.findElement(By.xpath("//input[@value='Delete']"));
-    }
-
     public WebElement getGoToCartButton() {
-        return driver.findElement(By.xpath("//span//a[contains(@href,'gp/cart')]"));
+        return driver.findElement(By.xpath("(//span//a[contains(@href,'gp/cart')])[1]"));
     }
 
     public WebElement getMsgAboutAddedItemToCart() {
@@ -42,11 +35,13 @@ public class CartPage extends BasePage {
         return getConfirmedIconAddedToCart().getCssValue("color");
     }
 
-    public void clickOnDeleteButton() {
-        getDeleteProductButton().click();
+    public void clickOnGoToCartButton() {
+        if(getGoToCartButton().isDisplayed()) {
+            getGoToCartButton().click();
+        } else {
+            driver.navigate().refresh();
+            waiters.fluentWaitVisibilityOfElement(getGoToCartButton()).click();
+        }
     }
 
-    public void clickOnGoToCartButton() {
-        waiters.elementToBeClickable(getGoToCartButton()).click();
-    }
 }
