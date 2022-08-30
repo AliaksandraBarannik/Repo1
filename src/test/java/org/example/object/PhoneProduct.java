@@ -8,7 +8,6 @@ import java.util.Objects;
 @Data
 public class PhoneProduct extends BaseProduct {
 
-    BaseProduct baseProduct;
     private String size;
     private String color;
     private String serviceProvider;
@@ -31,7 +30,6 @@ public class PhoneProduct extends BaseProduct {
 
         PhoneProduct that = (PhoneProduct) o;
 
-        if (!Objects.equals(baseProduct, that.baseProduct)) return false;
         if (!Objects.equals(size, that.size)) return false;
         if (!Objects.equals(color, that.color)) return false;
         return Objects.equals(serviceProvider, that.serviceProvider);
@@ -40,7 +38,6 @@ public class PhoneProduct extends BaseProduct {
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (baseProduct != null ? baseProduct.hashCode() : 0);
         result = 31 * result + (size != null ? size.hashCode() : 0);
         result = 31 * result + (color != null ? color.hashCode() : 0);
         result = 31 * result + (serviceProvider != null ? serviceProvider.hashCode() : 0);
@@ -50,7 +47,6 @@ public class PhoneProduct extends BaseProduct {
     @Override
     public String toString() {
         return "PhoneProduct{" +
-                "baseProduct=" + baseProduct +
                 ", size='" + size + '\'' +
                 ", color='" + color + '\'' +
                 ", serviceProvider='" + serviceProvider + '\'' +
