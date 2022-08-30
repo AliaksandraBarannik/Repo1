@@ -68,7 +68,7 @@ public class CompareObjectsInTheCartTest extends BaseTest {
         cartPageService = productPageService.clickAddCartButton();
         shoppingCartPageService = cartPageService.clickOnGoToCartButton();
 
-        assertThat("These objects are not equal", productService.getActualMouseObject(),
+        assertThat("These objects are not equal", productService.getActualGamingMouseObject(),
                 Matchers.equalTo(productService.getGamingMouseProduct(list)));
     }
 

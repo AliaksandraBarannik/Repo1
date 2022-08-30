@@ -17,6 +17,15 @@ public class HeadsetProduct extends BaseProduct {
         this.style = style;
     }
 
+    public HeadsetProduct createHeadsetProduct() {
+        HeadsetProduct headsetProduct = new HeadsetProduct();
+        String productName = shoppingCartPageService.getItemNameText().substring(0,40);
+        headsetProduct.setName(productName);
+        headsetProduct.setPrice(shoppingCartPageService.getItemPriceText());
+        headsetProduct.setStyle(shoppingCartPageService.getProductFieldValueByFieldNameText("Style"));
+        return headsetProduct;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

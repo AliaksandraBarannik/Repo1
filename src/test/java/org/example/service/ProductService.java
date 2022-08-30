@@ -8,34 +8,24 @@ import java.util.List;
 
 public class ProductService {
 
-    ShoppingCartPageService shoppingCartPageService = new ShoppingCartPageService();
+    private GamingMouseProduct gamingMouseProduct = new GamingMouseProduct();
+    private  HeadsetProduct headsetProduct = new HeadsetProduct();
+    private  PhoneProduct phoneProduct = new PhoneProduct();
 
     public PhoneProduct getPhoneProduct(List<String> list){
        return new PhoneProduct(list.get(0), list.get(4), list.get(1),list.get(2),list.get(3));
     }
 
     public PhoneProduct getActualPhoneObject() {
-        PhoneProduct phoneProduct = new PhoneProduct();
-        String productName = shoppingCartPageService.getItemNameText();
-        phoneProduct.setName(productName);
-        phoneProduct.setSize(shoppingCartPageService.getProductFieldValueByFieldNameText("Size"));
-        phoneProduct.setColor(shoppingCartPageService.getProductFieldValueByFieldNameText("Color"));
-        phoneProduct.setServiceProvider(shoppingCartPageService.getProductFieldValueByFieldNameText("Service Provider"));
-        phoneProduct.setPrice(shoppingCartPageService.getItemPriceText());
-        return phoneProduct;
+        return phoneProduct.createPhoneProduct();
     }
 
     public GamingMouseProduct getGamingMouseProduct(List<String> list){
         return new GamingMouseProduct(list.get(0).substring(0,40), list.get(4), list.get(2));
     }
 
-    public GamingMouseProduct getActualMouseObject() {
-        GamingMouseProduct gamingMouseProduct = new GamingMouseProduct();
-        String productName = shoppingCartPageService.getItemNameText().substring(0,40);
-        gamingMouseProduct.setName(productName);
-        gamingMouseProduct.setColor(shoppingCartPageService.getProductFieldValueByFieldNameText("Color"));
-        gamingMouseProduct.setPrice(shoppingCartPageService.getItemPriceText());
-        return gamingMouseProduct;
+    public GamingMouseProduct getActualGamingMouseObject() {
+        return gamingMouseProduct.createGamingMouseProduct();
     }
 
     public HeadsetProduct getHeadsetProduct(List<String> list){
@@ -43,11 +33,6 @@ public class ProductService {
     }
 
     public HeadsetProduct getActualHeadsetObject() {
-        HeadsetProduct headsetProduct = new HeadsetProduct();
-        String productName = shoppingCartPageService.getItemNameText().substring(0,40);
-        headsetProduct.setName(productName);
-        headsetProduct.setPrice(shoppingCartPageService.getItemPriceText());
-        headsetProduct.setStyle(shoppingCartPageService.getProductFieldValueByFieldNameText("Style"));
-        return headsetProduct;
+        return headsetProduct.createHeadsetProduct();
     }
 }

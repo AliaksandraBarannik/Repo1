@@ -50,9 +50,9 @@ public class ShoppingCartPage extends BasePage {
         return getItemsPrice().getText();
     }
 
-    public String getProductFieldValueByFieldNameText(String key) {
+    public String getProductFieldValueByFieldNameText(String fieldName) {
         String itemFields = "//span[@class='a-size-small a-text-bold' and contains(text(),'%s')]/following-sibling::span";
-        return driver.findElement(By.xpath(String.format(itemFields, key))).getText();
+        return driver.findElement(By.xpath(String.format(itemFields, fieldName))).getText();
     }
 
     public void clickOnDeleteButton() {

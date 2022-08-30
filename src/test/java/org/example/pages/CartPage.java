@@ -36,7 +36,7 @@ public class CartPage extends BasePage {
     }
 
     public void clickOnGoToCartButton() {
-        if(waiters.fluentWaitVisibilityOfElement(getGoToCartButton()).isDisplayed()) {
+        if(getGoToCartButton().isDisplayed()) {
             getGoToCartButton().click();
         } else {
             driver.navigate().refresh();

@@ -2,12 +2,16 @@ package org.example.object;
 
 
 import lombok.Data;
+import org.example.service.ShoppingCartPageService;
 
 import java.util.List;
 import java.util.Objects;
 
 @Data
 public class BaseProduct {
+
+    ShoppingCartPageService shoppingCartPageService = new ShoppingCartPageService();
+
     protected List<String> list;
 
     private String name;

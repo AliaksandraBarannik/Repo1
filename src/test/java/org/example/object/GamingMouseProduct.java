@@ -17,6 +17,15 @@ public class GamingMouseProduct extends BaseProduct {
         this.color = color;
     }
 
+    public GamingMouseProduct createGamingMouseProduct(){
+        GamingMouseProduct gamingMouseProduct = new GamingMouseProduct();
+        String productName = shoppingCartPageService.getItemNameText().substring(0,40);
+        gamingMouseProduct.setName(productName);
+        gamingMouseProduct.setColor(shoppingCartPageService.getProductFieldValueByFieldNameText("Color"));
+        gamingMouseProduct.setPrice(shoppingCartPageService.getItemPriceText());
+        return gamingMouseProduct;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

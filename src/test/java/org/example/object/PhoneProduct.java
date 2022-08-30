@@ -23,6 +23,17 @@ public class PhoneProduct extends BaseProduct {
         this.serviceProvider = serviceProvider;
     }
 
+    public PhoneProduct createPhoneProduct(){
+        PhoneProduct phoneProduct = new PhoneProduct();
+        String productName = shoppingCartPageService.getItemNameText();
+        phoneProduct.setName(productName);
+        phoneProduct.setSize(shoppingCartPageService.getProductFieldValueByFieldNameText("Size"));
+        phoneProduct.setColor(shoppingCartPageService.getProductFieldValueByFieldNameText("Color"));
+        phoneProduct.setServiceProvider(shoppingCartPageService.getProductFieldValueByFieldNameText("Service Provider"));
+        phoneProduct.setPrice(shoppingCartPageService.getItemPriceText());
+        return phoneProduct;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
