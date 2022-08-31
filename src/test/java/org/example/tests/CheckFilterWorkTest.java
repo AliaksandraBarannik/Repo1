@@ -14,6 +14,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -43,7 +44,7 @@ public class CheckFilterWorkTest extends BaseTest {
         List<String> actualResultProductList = resultPageService.listOfProductPrice(15);
         List<String> expectedResultProductList = new ArrayList<>(actualResultProductList);
         Collections.sort(expectedResultProductList);
-        Collections.reverse(expectedResultProductList);
+        expectedResultProductList.sort(Comparator.reverseOrder());
         assertThat("Price is sorted wrong", actualResultProductList, Matchers.equalTo(expectedResultProductList));
     }
 
@@ -77,8 +78,7 @@ public class CheckFilterWorkTest extends BaseTest {
                 "Cellular Technology", "Cell Phone Operating System", "Cellular Phone Form Factor", "Cellular Phone SIM Card Size",
                 "Cell Phone Connectivity Technology", "Cell Phone Features", "Cell Phone Display Type", "Cell Phone Camera Resolution",
                 "Cell Phone Shooting Modes", "Cellular Phone Biometric Security Feature", "Cell Phone Human Interface Input",
-                "Cellular Phone SIM Card Slot Count", "Cell Phone Connector Type", "Cell Phone Resolution", "Water Resistance Level",
-                "Availability");
+                "Cellular Phone SIM Card Slot Count", "Cell Phone Connector Type", "Cell Phone Resolution", "Water Resistance Level","Availability");
 
         assertThat("Check the names of filter options ", actualListOfOptionsNames, Matchers.equalTo(expectedListOfOptionsNames));
     }
