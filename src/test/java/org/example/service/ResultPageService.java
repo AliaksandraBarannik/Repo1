@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.pages.ResultPage;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 public class ResultPageService extends BasePageService {
@@ -30,5 +31,51 @@ public class ResultPageService extends BasePageService {
     public void clickOnSearchButton() {
         log.info("Click on Search button");
         resultPage.clickOnSearchButton();
+    }
+
+    public void clickOnFilterInput(String inputName) {
+        log.info("Click on filter with field name - " + inputName);
+        resultPage.clickOnFilterInput(inputName);
+    }
+
+    public void clickOnDropdownWithFilter(String fieldText) {
+        log.info("Click on dropdown with field name - " + fieldText);
+        resultPage.clickOnDropdownWithFilter(fieldText);
+    }
+
+    public List<String> listOfProductPrice(int itemQuantity) {
+        List<String> listOfProductPrices = resultPage.getListOfProductPrices(itemQuantity);
+        log.info("List of prices - " + listOfProductPrices);
+        return listOfProductPrices;
+    }
+
+    public List<String> getListOfOptionsNameFromFilter() {
+        List<String> listOfOptionsNameFromFilter = resultPage.getListOfOptionsNameFromFilter();
+        log.info("List of options name from filter - " + listOfOptionsNameFromFilter);
+        return listOfOptionsNameFromFilter;
+    }
+
+    public void clickOnRandomColor() {
+        log.info("Click on random color");
+        resultPage.clickOnRandomColor();
+    }
+
+
+    public boolean isSeeMoreLessButtonDisplayedInModalYear() {
+        boolean result = resultPage.isSeeMoreLessButtonDisplayedInModalYear();
+        log.info("See more/less button is displayed - " + result);
+        return result;
+    }
+
+    public boolean isClearButtonDisplayed() {
+        boolean result = resultPage.isClearButtonDisplayed();
+        log.info("Clear button is displayed - " + result);
+        return result;
+    }
+
+    public List<String> getListOfItemsName() {
+        List<String> listOfItemsName = resultPage.collectListOfItemsName();
+        log.info("List of items name - " + listOfItemsName);
+        return listOfItemsName;
     }
 }
