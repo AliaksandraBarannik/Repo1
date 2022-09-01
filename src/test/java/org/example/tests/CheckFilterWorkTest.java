@@ -2,7 +2,6 @@ package org.example.tests;
 
 import org.example.driver.BaseTest;
 import org.example.service.ResultPageService;
-import org.example.service.ShoppingCartPageService;
 import org.example.service.StartedPageService;
 import org.example.util.CommonMethodsForList;
 import org.hamcrest.Matchers;
@@ -14,8 +13,8 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -23,12 +22,10 @@ public class CheckFilterWorkTest extends BaseTest {
 
     private StartedPageService startedPageService;
     private ResultPageService resultPageService;
-    private ShoppingCartPageService shoppingCartPageService;
 
     @BeforeClass(alwaysRun = true)
     public void registration() {
         startedPageService = new StartedPageService();
-        shoppingCartPageService = new ShoppingCartPageService();
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -41,16 +38,16 @@ public class CheckFilterWorkTest extends BaseTest {
     @Test(description = "4")
     public void isPriceSortedFromMaxToMinTest() {
         resultPageService.clickOnDropdownWithFilter("Price: High to Low");
-        List<String> actualResultProductList = resultPageService.listOfProductPrice(15);
-        List<String> expectedResultProductList = new ArrayList<>(actualResultProductList);
-        Collections.sort(expectedResultProductList);
-        expectedResultProductList.sort(Comparator.reverseOrder());
+        List<String> actualResultProductList = resultPageService.listOfProductPrice(10);
+        List<String> newList = new ArrayList<>(actualResultProductList);
+        Collections.sort(newList);
+        List<String> expectedResultProductList = newList.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());
         assertThat("Price is sorted wrong", actualResultProductList, Matchers.equalTo(expectedResultProductList));
     }
 
     @Test(description = "4")
     public void isSeeMoreButtonDisplayedTest() {
-        assertThat("The image of added item is displayed", resultPageService.isSeeMoreLessButtonDisplayedInModalYear());
+        assertThat("The 'See more' button isn`t displayed", resultPageService.isSeeMoreLessButtonDisplayedInModalYear());
     }
 
 
@@ -66,7 +63,7 @@ public class CheckFilterWorkTest extends BaseTest {
     public void isSeeMoreButtonDisplayedAfterUsingFilterTest(String year) {
         resultPageService.clickOnFilterInput(year);
         resultPageService.clickOnRandomColor();
-        assertThat("The image of added item is displayed", resultPageService.isClearButtonDisplayed());
+        assertThat("'See more' button is displayed ", !resultPageService.isButtonDisplayedInTheYearFilter("See more"));
     }
 
     @Test(description = "4")
@@ -78,7 +75,7 @@ public class CheckFilterWorkTest extends BaseTest {
                 "Cellular Technology", "Cell Phone Operating System", "Cellular Phone Form Factor", "Cellular Phone SIM Card Size",
                 "Cell Phone Connectivity Technology", "Cell Phone Features", "Cell Phone Display Type", "Cell Phone Camera Resolution",
                 "Cell Phone Shooting Modes", "Cellular Phone Biometric Security Feature", "Cell Phone Human Interface Input",
-                "Cellular Phone SIM Card Slot Count", "Cell Phone Connector Type", "Cell Phone Resolution", "Water Resistance Level","Availability");
+                "Cellular Phone SIM Card Slot Count", "Cell Phone Connector Type", "Cell Phone Resolution", "Water Resistance Level", "Availability");
 
         assertThat("Check the names of filter options ", actualListOfOptionsNames, Matchers.equalTo(expectedListOfOptionsNames));
     }

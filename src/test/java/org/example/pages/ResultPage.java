@@ -37,8 +37,8 @@ public class ResultPage extends BasePage {
         return driver.findElement(By.xpath("//ul[contains(@aria-labelledby,'nine_browse-bin-title')]//a[@data-csa-interaction-events='click']"));
     }
 
-    public WebElement getClearButton() {
-        return driver.findElement(By.xpath("//select[@id='s-result-sort-select']"));
+    public List<WebElement> getListOfYearsInFilter() {
+        return driver.findElements(By.xpath("//ul[@aria-labelledby='p_n_feature_nine_browse-bin-title']/li[@class='a-spacing-micro']"));
     }
 
     public List<WebElement> getListOfItemsName() {
@@ -94,8 +94,9 @@ public class ResultPage extends BasePage {
         return getSeeMoreLessButtonOfModelYear().isDisplayed();
     }
 
-    public boolean isClearButtonDisplayed() {
-        return getClearButton().isDisplayed();
+    public boolean isButtonDisplayedInTheYearFilter(String str) {
+        List<String> collectionOfElementsOfYearFilter = CommonMethodsForList.getItemsNamesText(getListOfYearsInFilter());
+        return CommonMethodsForList.isListContainsString(collectionOfElementsOfYearFilter, str);
     }
 
     public List<String> collectListOfItemsName() {

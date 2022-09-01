@@ -18,16 +18,14 @@ public class CommonMethodsForList {
     }
 
     public static List<String> getFirstFewItemsFormPage(List<WebElement> list, int itemQuantity) {
+        int n = itemQuantity;
         List<String> newList = new ArrayList<>();
         List<String> listOfText = getItemsNamesText(list);
-        String str;
-        for (int i = 1; i < listOfText.size(); i++) {
-            if (i <= itemQuantity) {
-                str = listOfText.get(i);
-                newList.add(str);
-            } else {
-                return newList;
-            }
+        for (String s : listOfText) {
+            do {
+                newList.add(s);
+                n++;
+            } while (n < itemQuantity);
         }
         return newList;
     }
