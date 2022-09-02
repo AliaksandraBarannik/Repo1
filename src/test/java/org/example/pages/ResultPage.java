@@ -77,8 +77,8 @@ public class ResultPage extends BasePage {
         selectListBoxOption.selectByVisibleText(fieldText);
     }
 
-    public List<String> getListOfProductPrices(int itemQuantity) {
-        return CommonMethodsForList.getFirstFewItemsFormPage(getProductPrice(), itemQuantity);
+    public List<Integer> getListOfProductPrices() {
+        return CommonMethodsForList.convertElementsIntoInteger(getProductPrice());
     }
 
     public List<String> getListOfOptionsNameFromFilter() {
@@ -99,7 +99,7 @@ public class ResultPage extends BasePage {
         return CommonMethodsForList.isListContainsString(collectionOfElementsOfYearFilter, str);
     }
 
-    public List<String> collectListOfItemsName() {
-        return CommonMethodsForList.getFirstFewItemsFormPage(getListOfItemsName(), 10);
+    public List<String> getListOfItemsNames() {
+        return CommonMethodsForList.getItemsNamesText(getListOfItemsName());
     }
 }

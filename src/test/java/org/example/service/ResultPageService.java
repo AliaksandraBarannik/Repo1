@@ -43,8 +43,8 @@ public class ResultPageService extends BasePageService {
         resultPage.clickOnDropdownWithFilter(fieldText);
     }
 
-    public List<String> listOfProductPrice(int itemQuantity) {
-        List<String> listOfProductPrices = resultPage.getListOfProductPrices(itemQuantity);
+    public List<Integer> listOfProductPrice() {
+        List<Integer> listOfProductPrices = resultPage.getListOfProductPrices();
         log.info("List of prices - " + listOfProductPrices);
         return listOfProductPrices;
     }
@@ -72,8 +72,8 @@ public class ResultPageService extends BasePageService {
         return result;
     }
 
-    public List<String> getListOfItemsName() {
-        List<String> listOfItemsName = resultPage.collectListOfItemsName();
+    public List<String> getListOfItemsNames() {
+        List<String> listOfItemsName = resultPage.getListOfItemsNames();
         log.info("List of items name - " + listOfItemsName);
         return listOfItemsName;
     }

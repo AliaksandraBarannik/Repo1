@@ -1,8 +1,11 @@
 package org.example.tests;
 
 import org.example.driver.BaseTest;
+import org.example.object.User;
+import org.example.service.LoginPageService;
 import org.example.service.ResultPageService;
 import org.example.service.StartedPageService;
+import org.example.service.UserService;
 import org.example.util.CommonMethodsForList;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
@@ -22,10 +25,15 @@ public class CheckFilterWorkTest extends BaseTest {
 
     private StartedPageService startedPageService;
     private ResultPageService resultPageService;
+//    private LoginPageService loginPageService;
+
 
     @BeforeClass(alwaysRun = true)
     public void registration() {
+//        User user = UserService.credentials();
         startedPageService = new StartedPageService();
+//        loginPageService = startedPageService.clickOnSignInMenu();
+//        startedPageService = loginPageService.logIn(user);
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -38,10 +46,10 @@ public class CheckFilterWorkTest extends BaseTest {
     @Test(description = "4")
     public void isPriceSortedFromMaxToMinTest() {
         resultPageService.clickOnDropdownWithFilter("Price: High to Low");
-        List<String> actualResultProductList = resultPageService.listOfProductPrice(10);
-        List<String> newList = new ArrayList<>(actualResultProductList);
-        Collections.sort(newList);
-        List<String> expectedResultProductList = newList.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());
+        List<Integer> actualResultProductList = resultPageService.listOfProductPrice();
+        List<Integer> newList = new ArrayList<>(actualResultProductList);
+        List<Integer> sortedNaturalOrderList = newList.stream().sorted(Integer::compareTo).collect(Collectors.toList());
+        List<Integer> expectedResultProductList = sortedNaturalOrderList.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());
         assertThat("Price is sorted wrong", actualResultProductList, Matchers.equalTo(expectedResultProductList));
     }
 
@@ -83,7 +91,7 @@ public class CheckFilterWorkTest extends BaseTest {
     @Test(description = "4")
     public void checkFilterWorkTest() {
         resultPageService.clickOnFilterInput("iOS");
-        List<String> listOfResult = resultPageService.getListOfItemsName();
+        List<String> listOfResult = resultPageService.getListOfItemsNames();
         assertThat("List of items not contain iOS product", CommonMethodsForList.isListContainsString(listOfResult, "iPhone"));
     }
 }

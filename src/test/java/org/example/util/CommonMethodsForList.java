@@ -17,15 +17,22 @@ public class CommonMethodsForList {
         list.stream().findAny().ifPresent(WebElement::click);
     }
 
-    public static List<String> getFirstFewItemsFormPage(List<WebElement> list, int itemQuantity) {
-        int n = itemQuantity;
-        List<String> newList = new ArrayList<>();
+    public static List<Integer> convertElementsIntoInteger(List<WebElement> list) {
+        int n = 0;
+        int b = 0;
+        List<Integer> newList = new ArrayList<>();
         List<String> listOfText = getItemsNamesText(list);
         for (String s : listOfText) {
             do {
-                newList.add(s);
+                if (s.contains(",")) {
+                    String str = s.replace(",", "");
+                    b = Integer.parseInt(str);
+                    newList.add(b);
+                } else {
+                    newList.add(b);
+                }
                 n++;
-            } while (n < itemQuantity);
+            } while (n < listOfText.size());
         }
         return newList;
     }
